@@ -49,8 +49,10 @@
 .glass {
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
   backdrop-filter: blur(6px) saturate(120%);
-  border: 1px solid var(--glass-border);
+  border: none;
 }
+
+.glass { overflow: visible }
 
 .fade-in-up {
   transform: translateY(8px);
@@ -67,11 +69,9 @@
 
 .muted { color: #9aa4b2 }
 
-/* subtle scrollbar for tables */
 ::-webkit-scrollbar { height: 8px; width: 8px }
 ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.06); border-radius: 8px }
 
-/* Global fallback overrides so theme is applied even if Tailwind utilities aren't generated */
 :root {
   --cc-primary: #8b5cf6;
   --cc-bg: #000000;
@@ -85,5 +85,35 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.change-positive { color: #10b981 } /* green-400 */
+.change-neutral { color: #38bdf8 } /* sky-400 */
+.change-negative { color: #ef4444 } /* red-500 */
+
+.converter-amount-row { margin-top: 0.75rem; margin-bottom: 1.5rem }
+.converter-selects { margin-top: 1rem; margin-bottom: 1.5rem }
+
+header::before, header::after { content: none !important; display: none !important }
+
+.swap-rotate {
+  display: inline-block;
+  transition: transform 300ms cubic-bezier(.2,.9,.2,1);
+}
+.swap-rotate.animating {
+  transform: rotate(180deg);
+}
+
+input.no-spinner::-webkit-outer-spin-button,
+input.no-spinner::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input.no-spinner {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.no-spinner:focus { outline: none }
+
 
 

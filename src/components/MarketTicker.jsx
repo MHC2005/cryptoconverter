@@ -1,13 +1,20 @@
 import React from "react";
 
-export default function MarketTicker({ prices = {}, loading }) {
+export default function MarketTicker({ prices = {}, loading, lastUpdated = null }) {
   const coins = ["BTC", "ETH", "SOL", "XRP", "USDT", "ADA", "BNB", "DOT"];
+
+  const formatTime = (ts) => {
+    if (!ts) return "";
+    try {
+      return new Date(ts).toLocaleTimeString();
+    } catch (e) { return "" }
+  }
 
   return (
     <div className="w-full">
-      <div className="flex items-center justify-between px-3 py-2 border-b border-white/4">
+      <div className="flex items-center justify-between px-3 py-2">
         <h3 className="text-lg font-semibold">Markets</h3>
-        <div className="text-sm text-muted">Real-time prices · updated every 15s</div>
+        <div className="text-sm text-muted">Last update: {formatTime(lastUpdated)}</div>
       </div>
 
       <div className="overflow-x-auto">
@@ -32,14 +39,17 @@ export default function MarketTicker({ prices = {}, loading }) {
               const usd = p.usd ? `$${p.usd.toFixed(2)}` : "—";
               const eur = p.eur ? `€${p.eur.toFixed(2)}` : "—";
               // placeholder for 24h change, if available
-              const change = p.usd_24h_change ? `${p.usd_24h_change.toFixed(2)}%` : "—";
+              const changeVal = typeof p.usd_24h_change === 'number' ? p.usd_24h_change : null;
+              const change = changeVal !== null ? `${changeVal.toFixed(2)}%` : "—";
+              // color: positive green, neutral blue (0), negative red
+              const changeClass = changeVal === null ? 'text-muted' : (changeVal > 0 ? 'change-positive' : (changeVal === 0 ? 'change-neutral' : 'change-negative'));
 
               return (
-                <tr key={c} className="border-b border-white/2">
+                <tr key={c}>
                   <td className="px-3 py-3 font-medium">{c}</td>
                   <td className="px-3 py-3">{usd}</td>
                   <td className="px-3 py-3">{eur}</td>
-                  <td className={`px-3 py-3 ${p.usd_24h_change > 0 ? 'text-green-400' : 'text-red-400'}`}>
+                  <td className={`px-3 py-3 ${changeClass}`}>
                     {change}
                   </td>
                 </tr>

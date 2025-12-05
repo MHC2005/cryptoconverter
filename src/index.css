@@ -4,6 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Note: global bg/text classes applied on <body> in index.html to avoid @apply issues */
+/* global bg/text classes applied on <body> in index.html to avoid @apply issues */
 html, body, #root { height: 100% }
 body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale }
