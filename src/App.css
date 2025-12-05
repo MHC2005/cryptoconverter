@@ -40,3 +40,50 @@
 .read-the-docs {
   color: #888;
 }
+
+:root {
+  --glass-bg: rgba(15, 23, 32, 0.6);
+  --glass-border: rgba(255,255,255,0.04);
+}
+
+.glass {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  backdrop-filter: blur(6px) saturate(120%);
+  border: 1px solid var(--glass-border);
+}
+
+.fade-in-up {
+  transform: translateY(8px);
+  opacity: 0;
+  animation: fadeUp .45s ease forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.muted { color: #9aa4b2 }
+
+/* subtle scrollbar for tables */
+::-webkit-scrollbar { height: 8px; width: 8px }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.06); border-radius: 8px }
+
+/* Global fallback overrides so theme is applied even if Tailwind utilities aren't generated */
+:root {
+  --cc-primary: #8b5cf6;
+  --cc-bg: #000000;
+  --cc-font: 'Poppins', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
+body {
+  background: var(--cc-bg);
+  color: var(--cc-primary);
+  font-family: var(--cc-font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+

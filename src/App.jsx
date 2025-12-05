@@ -1,18 +1,38 @@
 import { usePrices } from "./hooks/usePrices";
 import ConverterCard from "./components/ConverterCard";
+import Header from "./components/Header";
+import MarketTicker from "./components/MarketTicker";
 
 function App() {
   const { prices, loading } = usePrices();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 to-black flex items-center justify-center p-6">
-      {loading ? (
-        <p className="text-white text-xl animate-pulse">
-          Loading crypto prices...
-        </p>
-      ) : (
-        <ConverterCard prices={prices} />
-      )}
+  <div className="min-h-screen bg-darkbg text-primary font-sans">
+      <Header />
+
+      <main className="max-w-6xl mx-auto px-6 py-10">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+          <section className="lg:col-span-1">
+            <div className="glass rounded-2xl p-6 shadow-2xl fade-in-up">
+              {loading ? (
+                <p className="text-primary text-lg animate-pulse">Loading crypto prices...</p>
+              ) : (
+                <ConverterCard prices={prices} />
+              )}
+            </div>
+          </section>
+
+          <section className="lg:col-span-2">
+            <div className="glass rounded-2xl p-4 shadow-lg fade-in-up">
+              <MarketTicker prices={prices} loading={loading} />
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <footer className="text-center text-sm text-muted py-6">
+        © {new Date().getFullYear()} CryptoConverter — Built for speed and clarity.
+      </footer>
     </div>
   );
 }
